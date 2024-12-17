@@ -14,7 +14,6 @@ space requirements of the framebuffer and the lut (~325kb).
 Built using [`esp-hal`] and [`embedded-graphics`]
 
 [`esp-hal`]: https://github.com/esp-rs/esp-hal
-
 [`embedded-graphics`]: https://docs.rs/embedded-graphics/
 
 **WARNING:**
@@ -43,26 +42,23 @@ use embedded_graphics::{
 use embedded_graphics_core::pixelcolor::{Gray4, GrayColor};
 use esp_backtrace as _;
 use esp_hal::{
-    clock::ClockControl,
-    delay::Delay,
-    gpio::Io,
-    peripherals::Peripherals,
-    prelude::*,
+    clock::ClockControl, delay::Delay, gpio::Io, peripherals::Peripherals, prelude::*,
     system::SystemControl,
 };
-use lilygo_epd47::{Display, DrawMode};
+use lilygo_epd47::{pin_config, Display, DrawMode};
 
 #[entry]
 fn main() -> ! {
     let peripherals = Peripherals::take();
     let system = SystemControl::new(peripherals.SYSTEM);
     let clocks = ClockControl::boot_defaults(system.clock_control).freeze();
+    let io = Io::new(peripherals.GPIO, peripherals.IO_MUX);
     let delay = Delay::new(&clocks);
     // Create PSRAM allocator
     esp_alloc::psram_allocator!(peripherals.PSRAM, esp_hal::psram);
     // Initialise the display
     let mut display = Display::new(
-        Io::new(peripherals.GPIO, peripherals.IO_MUX),
+        pin_config!(io),
         peripherals.DMA,
         peripherals.LCD_CAM,
         peripherals.RMT,
@@ -114,10 +110,9 @@ Run examples like this ` cargo run --release --example <name>`.
 
 This project is largely based on the C implementations provided by:
 
-* [Official LilyGo Driver](https://github.com/Xinyuan-LilyGO/LilyGo-EPD47)
-* [epdiy](https://github.com/vroland/epdiy)
+- [Official LilyGo Driver](https://github.com/Xinyuan-LilyGO/LilyGo-EPD47)
+- [epdiy](https://github.com/vroland/epdiy)
 
 ## License
 
 Unless otherwise stated the provided code is licensed under the terms of the GNU General Public License v3.0.
-
