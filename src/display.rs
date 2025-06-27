@@ -1,6 +1,6 @@
 use alloc::{boxed::Box, vec, vec::Vec};
 
-use esp_hal::{delay::Delay, dma::TxChannelFor, peripheral::Peripheral, peripherals};
+use esp_hal::{delay::Delay, dma::TxChannelFor, peripherals};
 
 use crate::{ed047tc1, Error, Result};
 
@@ -65,17 +65,14 @@ impl<'a> Display<'a> {
         width: Self::WIDTH,
         height: Self::HEIGHT,
     };
-    pub fn new<CH>(
-        pins: ed047tc1::PinConfig,
-        dma: impl Peripheral<P = CH> + 'a,
-        lcd_cam: impl Peripheral<P = peripherals::LCD_CAM> + 'a,
-        rmt: impl Peripheral<P = peripherals::RMT> + 'a,
-    ) -> Result<Self>
-    where
-        CH: TxChannelFor<peripherals::LCD_CAM>,
-    {
+    pub fn new(
+        pins: ed047tc1::PinConfig<'a>,
+        dma_channel: impl TxChannelFor<peripherals::LCD_CAM<'a>>,
+        lcd_cam: peripherals::LCD_CAM<'a>,
+        rmt: peripherals::RMT<'a>,
+    ) -> Result<Self> {
         Ok(Display {
-            epd: ed047tc1::ED047TC1::new(pins, dma, lcd_cam, rmt)?,
+            epd: ed047tc1::ED047TC1::new(pins, dma_channel, lcd_cam, rmt)?,
             skipping: 0,
             framebuffer: Box::new([0xFF; FRAMEBUFFER_SIZE]),
             tainted_rows: [0; TAINTED_ROWS_SIZE],
