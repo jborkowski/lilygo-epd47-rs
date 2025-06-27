@@ -1,5 +1,3 @@
-use core::ops::DerefMut;
-
 use esp_hal::{
     gpio::Level,
     peripherals,

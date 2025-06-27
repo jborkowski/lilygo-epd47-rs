@@ -7,10 +7,9 @@ use esp_hal::{
         LcdCam,
     },
     peripherals,
-    time::{Duration, Rate},
+    time::Rate,
     Blocking,
 };
-use esp_println::println;
 
 use crate::rmt;
 
