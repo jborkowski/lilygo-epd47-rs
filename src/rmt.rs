@@ -34,10 +34,10 @@ impl<'a> Rmt<'a> {
                 unsafe { peripherals::GPIO38::steal() }, // TODO: find better solution
                 rmt::TxChannelConfig::default()
                     .with_clk_divider(8)
-                    .with_idle_output_level(false)
+                    .with_idle_output_level(Level::Low)
                     .with_idle_output(true)
                     .with_carrier_modulation(false)
-                    .with_carrier_level(false),
+                    .with_carrier_level(Level::Low),
             
             )
             .map_err(crate::Error::Rmt)?;
