@@ -57,6 +57,12 @@ dependencies = [
 
 [[package]]
 name = "bitflags"
+version = "1.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
+
+[[package]]
+name = "bitflags"
 version = "2.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1b8e56985ec62d17e9c1001dc89c88ecd7dc08e47eba5ec7c29c7b5eeecde967"
@@ -128,6 +134,38 @@ dependencies = [
  "darling_core",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "defmt"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "548d977b6da32fa1d1fda2876453da1e7df63ad0304c8b3dae4dbe7b96f39b78"
+dependencies = [
+ "bitflags 1.3.2",
+ "defmt-macros",
+]
+
+[[package]]
+name = "defmt-macros"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3d4fc12a85bcf441cfe44344c4b72d58493178ce635338a3f3b78943aceb258e"
+dependencies = [
+ "defmt-parser",
+ "proc-macro-error2",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "defmt-parser"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "10d60334b3b2e7c9d91ef8150abfb6fa4c1c39ebbcf4a81c2e346aad939fee3e"
+dependencies = [
+ "thiserror",
 ]
 
 [[package]]
@@ -343,6 +381,7 @@ version = "1.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "11a6b7c3d347de0a9f7bfd2f853be43fe32fa6fac30c70f6d6d67a1e936b87ee"
 dependencies = [
+ "defmt",
  "enumset_derive",
 ]
 
@@ -373,6 +412,7 @@ dependencies = [
  "allocator-api2",
  "cfg-if",
  "critical-section",
+ "defmt",
  "document-features",
  "enumset",
  "linked_list_allocator",
@@ -423,7 +463,7 @@ checksum = "0d973697621cd3eef9c3f260fa8c1af77d8547cfc92734255d8e8ddf05c7d331"
 dependencies = [
  "basic-toml",
  "bitfield",
- "bitflags",
+ "bitflags 2.9.1",
  "bytemuck",
  "cfg-if",
  "critical-section",
@@ -499,6 +539,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fae8b38d5fdc1d29d823c4737f18edfb0ccf0406985cf893f87c0cfc26a6ab33"
 dependencies = [
  "critical-section",
+ "defmt",
  "document-features",
  "esp-build",
  "esp-metadata",
@@ -686,6 +727,7 @@ checksum = "4a5f13b858c8d314ee3e8f639011f7ccefe71f97f96e50151fb991f267928e2c"
 name = "lilygo-epd47"
 version = "0.5.0"
 dependencies = [
+ "defmt",
  "embedded-graphics",
  "embedded-graphics-core",
  "esp-alloc",
@@ -1022,6 +1064,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "06794f8f6c5c898b3275aebefa6b8a1cb24cd2c6c79397ab15774837a0bc5755"
 dependencies = [
  "winapi-util",
+]
+
+[[package]]
+name = "thiserror"
+version = "2.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "567b8a2dae586314f7be2a752ec7474332959c6460e02bde30d702a66d488708"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "2.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f7cf42b4507d8ea322120659672cf1b9dbb93f8f2d4ecfd6e51350ff5b17a1d"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

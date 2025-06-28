@@ -9,15 +9,14 @@ use core::format_args;
 use embedded_graphics::prelude::*;
 use embedded_graphics_core::pixelcolor::{Gray4, GrayColor};
 use esp_backtrace as _;
-use esp_hal::{delay::Delay, prelude::*};
+use esp_hal::{delay::Delay, main};
 use lilygo_epd47::{pin_config, Display, DrawMode};
 use u8g2_fonts::FontRenderer;
 
 static FONT: FontRenderer = FontRenderer::new::<u8g2_fonts::fonts::u8g2_font_spleen32x64_mr>();
 
-#[entry]
+#[main]
 fn main() -> ! {
-    esp_println::logger::init_logger_from_env();
 
     let peripherals = esp_hal::init(esp_hal::Config::default());
 

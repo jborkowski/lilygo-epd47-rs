@@ -9,14 +9,20 @@ use embedded_graphics::{
     primitives::{Circle, PrimitiveStyle},
 };
 use embedded_graphics_core::pixelcolor::{Gray4, GrayColor};
-use esp_backtrace as _;
-use esp_hal::{delay::Delay, prelude::*};
+
 use lilygo_epd47::{pin_config, Display, DrawMode};
 
-#[entry]
-fn main() -> ! {
-    esp_println::logger::init_logger_from_env();
+use esp_backtrace as _;
+use esp_hal::{
+    delay::Delay,
+    main,
+    time::Duration,
+};
+use esp_println as _;
 
+
+#[main]
+fn main() -> ! {
     let peripherals = esp_hal::init(esp_hal::Config::default());
     let delay = Delay::new();
 
@@ -25,7 +31,7 @@ fn main() -> ! {
     // Initialise the display
     let mut display = Display::new(
         pin_config!(peripherals),
-        peripherals.DMA,
+        peripherals.DMA_CH0,
         peripherals.LCD_CAM,
         peripherals.RMT,
     )
