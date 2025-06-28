@@ -19,7 +19,7 @@ esp-println = { version = "0.14.0", features = ["esp32s3"] }
 
 [dev-dependencies]
 esp-println = { version = "0.14.0", features = ["esp32s3"] }
-esp-backtrace = { version = "0.15.0", features = [
+esp-backtrace = { version = "0.16.0", features = [
     "esp32s3",
     "exception-handler",
     "panic-handler",
